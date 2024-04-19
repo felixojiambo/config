@@ -1,45 +1,46 @@
-application:
- name: authentication
 server:
- port: 7800
+  port: 7800
+
 eureka:
- client:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8089/eureka/
+
 spring:
- datasource:
+  datasource:
     url: jdbc:mariadb://localhost:3306/mutua
     username: root
     password: 5418feliX
- driverClassName: org.mariadb.jdbc.Driver
- jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: update
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MariaDBDialect
- servlet:
+    driverClassName: org.mariadb.jdbc.Driver
+  config:
+    import:
+      optional:
+        configserver:
+  servlet:
     multipart:
       enabled: true
       max-file-size: 1GB
       max-request-size: 1GB
- rabbitmq:
-    host: 172.24.0.1
+  application:
+    name: authentication
+  rabbitmq:
+    host: localhost
     port: 5673
     username: felix
     password: 56725672
-    virtual-host: /
-    eureka:
-      client:
-        serviceUrl:
-          defaultZone: http://localhost:8761/eureka/
+  cloud:
+    config:
+      import-check:
+        enabled: false
+
 file:
- upload-dir: src/main/resources/uploads
+  upload-dir: src/main/resources/uploads
 Trainingfile:
- upload-dir: src/main/resources/uploads
+  upload-dir: src/main/resources/uploads
 myapp:
- upload-directory: src/main/resources/uploads/videos
+  upload-directory: src/main/resources/uploads/videos
 reports_absolute_path: src/main/resources
 backup_absolute_path: src/main/resources/backup/
 company_logo_path: src/main/resources/Kingdom-Bank-logo.png
@@ -47,18 +48,19 @@ company_logo_path2: src/main/resources/e&m-logo.png2
 image_banner: src/main/resources/Kingdom-bank-banner.png
 image_banner2: src/main/resources/e&m_banner.jpg
 mvc:
- pathmatch:
+  pathmatch:
     matching-strategy: ant-path-matcher
 cache:
- type: SIMPLE
+  type: SIMPLE
 resource_path: /home/coullence/Documents/PROD/EMT_ERP_Stage/EMT_ERP_backend/hr_service/src/main/resources
+
 mail:
- protocol: smtps
- host: mail.emtechhouse.co.ke
- port: 465
- username: no-reply@emtechhouse.co.ke
- password: Pass123
- properties:
+  protocol: smtps
+  host: mail.emtechhouse.co.ke
+  port: 465
+  username: no-reply@emtechhouse.co.ke
+  password: Pass123
+  properties:
     mail:
       smtp:
         auth: true
@@ -66,11 +68,14 @@ mail:
           trust: "*"
         starttls:
           enable: true
+
 application:
- enableEmail: true
- useOTP: true
- otpProd: true
- otpTestMail: ckibet@emtechhouse.co.ke
+  name: authentication
+  enableEmail: true
+  useOTP: true
+  otpProd: true
+  otpTestMail: ckibet@emtechhouse.co.ke
+
 backup_mail: coullence@gmail.com
 from_mail: no-reply@emtechhouse.co.ke
 cc_mail: coullence@gmail.com
@@ -85,18 +90,22 @@ emailOrganizationMail: info@kingdombankltd.co.ke
 emailOrganizationAddress: P.O. BOX 22741-00400
 emailOrganizationLocation: Kingdom Bank Towers, Argwings Kodhek Road, Kilimani
 emailOrganizationWebsite: https://www.kingdombankltd.co.ke/
+
 google:
- app:
+  app:
     jwtSecret: bezKoderSecretKey
     jwtExpirationMs: 86400000
+
 users:
- app:
+  app:
     jwtSecret: /buCOEjS/+H7ZwekxyLKLdDeegHUGEytjxuivosdrzjRG4g4E+kA3uXO5lvGBVsl2NwqsgiGUUI5bjgY/6WG/VSIIG+22b1Rvdb59BY0YRod6Dnjnp0REsPn//hshs6ucnOVCBRp0lbVb1kP+EDOM7W7N72/+t+R1d8JQ4pjisoJZI4e0MV3PlZtzXKI0SY2EQUtI
     jwtExpirationMs: 43200000
     client:
       origin: http://localhost:4200/
+
 organisation:
- email: no-reply@emtechhouse.co.ke
+  email: no-reply@emtechhouse.co.ke
+
 API_GATWAY_URL: http://52.15.152.26:6200
 CREDENTIALS_REQ_URL: http://52.15.152.26:6200/api/v1/users/create
 FINANCE_REQ_URL: http://52.15.152.26:8199/api/v1/salaries/create
