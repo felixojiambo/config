@@ -14,10 +14,11 @@ spring:
     username: root
     password: 5418feliX
     driverClassName: org.mariadb.jdbc.Driver
-  config:
-    import:
-      optional:
-        configserver:
+  cloud:
+    config:
+      uri: http://localhost:8888
+      import-check:
+        enabled: false
   servlet:
     multipart:
       enabled: true
